@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Historia de Amor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #d63384;
+            --secondary: #ff758c;
+            --accent: #6a11cb;
+            --dark: #0c0c0c;
+            --light: #f8f9fa;
+            --text: #e9ecef;
+            --gray: #6c757d;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            5% { transform: scale(1.1); }
+            10% { transform: scale(1); }
+            15% { transform: scale(1.1); }
+            20% { transform: scale(1); }
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 5px rgba(214, 51, 132, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(214, 51, 132, 0.8); }
+        }
+
+        .animate-fadein {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-heartbeat {
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .animate-glow {
+            animation: glow 2s infinite;
+        }
+
+        /* Modal de consentimiento de audio */
+        .audio-consent-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .audio-consent-modal.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .consent-content {
+            background-color: rgba(20, 20, 20, 0.95);
+            padding: 50px 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            border: 2px solid var(--primary);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            transform: scale(0.9);
+            animation: fadeIn 0.5s ease-out 0.3s forwards;
+        }
+
+        .consent-icon {
+            font-size: 5rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            animation: pulse 2s infinite;
+        }
+
+        .consent-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .consent-text {
+            font-size: 1.3rem;
+            color: var(--text);
+            margin-bottom: 35px;
+            line-height: 1.7;
+        }
+
+        .consent-btn {
+            padding: 18px 45px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: var(--primary);
+            color: white;
+            margin: 10px 15px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-width: 250px;
+        }
+
+        .consent-btn:hover {
+            background-color: #c2255c;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(210, 51, 132, 0.4);
+        }
+
+        .consent-btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .consent-btn-secondary:hover {
+            background-color: rgba(214, 51, 132, 0.1);
+        }
+
+        .consent-footer {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-style: italic;
+        }
+
+        /* Sección 1: Portada */
+        .cover-section {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .cover-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            color: var(--light);
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+            margin-bottom: 20px;
+            line-height: 1.1;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .cover-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 500;
+            color: var(--secondary);
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .cover-text {
+            font-size: 1.4rem;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            color: var(--text);
+            font-weight: 300;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .cover-buttons {
+            display: flex;
+            gap: 25px;
+            margin-top: 30px;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .cover-btn {
+            padding: 16px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-letter {
+            background-color: var(--primary);
+            color: white;
+            border: 2px solid var(--primary);
+        }
+
+        .btn-letter:hover {
+            background-color: #c2255c;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(210, 51, 132, 0.4);
+        }
+
+        .btn-moments {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-moments:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        /* Sección 2: Poemas */
+        .poem-section {
+            min-height: 100vh;
+            padding: 100px 20px;
+            background-color: var(--dark);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .section-subtitle {
+            font-size: 1.4rem;
+            color: var(--gray);
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .poem-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .poem-card {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            background-color: rgba(30, 30, 30, 0.7);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .poem-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(214, 51, 132, 0.2);
+            border-color: rgba(214, 51, 132, 0.3);
+        }
+
+        .poem-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--secondary);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .poem-card-content {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            line-height: 1.8;
+            text-align: center;
+            color: var(--text);
+            margin-bottom: 30px;
+        }
+
+        .poem-card-number {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--gray);
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        /* Sección 3: Carta */
+        .letter-section {
+            min-height: 100vh;
+            padding: 100px 20px;
+            background: linear-gradient(rgba(12, 12, 12, 0.95), rgba(12, 12, 12, 0.95)), 
+                        url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .letter-container {
+            max-width: 800px;
+            background-color: rgba(20, 20, 20, 0.9);
+            border-radius: 15px;
+            padding: 70px 60px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .letter-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            border-radius: 15px 15px 0 0;
+        }
+
+        .letter-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--secondary);
+            text-align: center;
+            margin-bottom: 50px;
+            font-weight: 600;
+        }
+
+        .letter-content {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.7rem;
+            line-height: 1.9;
+            color: var(--text);
+            margin-bottom: 50px;
+        }
+
+        .letter-signature {
+            text-align: right;
+            margin-top: 70px;
+        }
+
+        .signature-line {
+            font-size: 1.5rem;
+            color: var(--gray);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+
+        .signature-name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.8rem;
+            color: var(--secondary);
+            margin-top: 5px;
+        }
+
+        .letter-footer {
+            text-align: center;
+            margin-top: 60px;
+            font-size: 1.2rem;
+            color: var(--gray);
+            font-style: italic;
+        }
+
+        /* Sección 4: Frases */
+        .quotes-section {
+            min-height: 80vh;
+            padding: 100px 20px;
+            background-color: var(--dark);
+            position: relative;
+        }
+
+        .quotes-slider {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .quote-item {
+            text-align: center;
+            padding: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .quote-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 30px;
+            display: inline-block;
+        }
+
+        .quote-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            line-height: 1.8;
+            color: var(--text);
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .quote-author {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+        .swiper-pagination-bullet {
+            background-color: var(--gray);
+            opacity: 0.5;
+            width: 12px;
+            height: 12px;
+        }
+
+        .swiper-pagination-bullet-active {
+            background-color: var(--primary);
+            opacity: 1;
+        }
+
+        /* Sección 5: Cuenta regresiva */
+        .countdown-section {
+            min-height: 100vh;
+            padding: 100px 20px;
+            background: linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.9)), 
+                        url('https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .countdown-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+            z-index: 1;
+        }
+
+        .countdown-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+        }
+
+        .countdown-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .countdown-subtitle {
+            font-size: 1.5rem;
+            color: var(--text);
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 70px;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 150px;
+        }
+
+        .countdown-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .countdown-label {
+            font-size: 1.3rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* REPRODUCTOR DE YOUTUBE - SOLUCIÓN 1 (ENLACE DIRECTO) */
+        .youtube-player-container {
+            background-color: rgba(30, 30, 30, 0.7);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(30px);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .youtube-icon {
+            color: #ff0000;
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .youtube-title-section {
+            margin-bottom: 25px;
+        }
+
+        .youtube-main-title {
+            color: var(--secondary);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .youtube-song-title {
+            color: var(--text);
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .youtube-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background-color: #ff0000;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+        }
+
+        .youtube-link-btn:hover {
+            background-color: #cc0000;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
+        }
+
+        .youtube-instructions {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-top: 20px;
+        }
+
+        .youtube-instructions i {
+            color: var(--primary);
+            margin-right: 5px;
+        }
+
+        /* Sección 6: Carrusel de imágenes */
+        .gallery-section {
+            min-height: 100vh;
+            padding: 100px 20px;
+            background-color: var(--dark);
+        }
+
+        .gallery-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.5rem;
+            color: var(--secondary);
+            text-align: center;
+            margin-bottom: 70px;
+            font-weight: 700;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .gallery-slider {
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .swiper-slide {
+            border-radius: 15px;
+            overflow: hidden;
+            height: 500px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .swiper-button-next, .swiper-button-prev {
+            color: var(--primary);
+            background-color: rgba(20, 20, 20, 0.7);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            backdrop-filter: blur(5px);
+        }
+
+        .swiper-button-next:after, .swiper-button-prev:after {
+            font-size: 1.5rem;
+        }
+
+        /* Sección 7: Frases finales */
+        .final-section {
+            min-height: 80vh;
+            padding: 100px 20px;
+            background: linear-gradient(rgba(12, 12, 12, 0.9), rgba(12, 12, 12, 0.9)), 
+                        url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .final-container {
+            max-width: 900px;
+        }
+
+        .final-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: var(--secondary);
+            margin-bottom: 50px;
+            font-weight: 700;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .final-quotes {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .final-quote {
+            flex: 1;
+            min-width: 250px;
+            max-width: 400px;
+            background-color: rgba(30, 30, 30, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            border-left: 5px solid var(--primary);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .final-quote-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            line-height: 1.7;
+            color: var(--text);
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .final-quote-author {
+            font-size: 1.2rem;
+            color: var(--gray);
+            text-align: right;
+        }
+
+        .heart-container {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-top: 40px;
+            opacity: 0;
+            transform: scale(0.5);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #050505;
+            padding: 60px 20px 30px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-logo {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: var(--secondary);
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .footer-text {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        .copyright {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        /* Navegación */
+        .navigation {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .nav-dots {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background-color: var(--primary);
+            transform: scale(1.3);
+        }
+
+        .nav-dot:hover {
+            background-color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .cover-title {
+                font-size: 4rem;
+            }
+            
+            .section-title, .letter-title, .countdown-title {
+                font-size: 3.2rem;
+            }
+            
+            .countdown-number {
+                font-size: 4rem;
+            }
+            
+            .gallery-title, .final-title {
+                font-size: 3.5rem;
+            }
+            
+            .swiper-slide {
+                height: 400px;
+            }
+            
+            .youtube-player-container {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cover-title {
+                font-size: 3.2rem;
+            }
+            
+            .cover-subtitle {
+                font-size: 1.8rem;
+            }
+            
+            .cover-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .cover-btn {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+                justify-content: center;
+            }
+            
+            .poem-card, .letter-container {
+                padding: 30px 25px;
+            }
+            
+            .countdown-container {
+                gap: 20px;
+            }
+            
+            .countdown-item {
+                min-width: 120px;
+            }
+            
+            .countdown-number {
+                font-size: 3.5rem;
+            }
+            
+            .youtube-player-container {
+                padding: 25px;
+                width: 90%;
+            }
+            
+            .youtube-main-title {
+                font-size: 1.6rem;
+            }
+            
+            .youtube-song-title {
+                font-size: 1.2rem;
+            }
+            
+            .navigation {
+                top: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .cover-title {
+                font-size: 2.8rem;
+            }
+            
+            .section-title, .letter-title, .countdown-title, .gallery-title, .final-title {
+                font-size: 2.5rem;
+            }
+            
+            .cover-subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .poem-card-content, .letter-content {
+                font-size: 1.4rem;
+            }
+            
+            .countdown-container {
+                gap: 15px;
+            }
+            
+            .countdown-item {
+                min-width: 100px;
+            }
+            
+            .countdown-number {
+                font-size: 2.8rem;
+            }
+            
+            .swiper-slide {
+                height: 300px;
+            }
+            
+            .youtube-player-container {
+                padding: 20px;
+            }
+            
+            .youtube-main-title {
+                font-size: 1.4rem;
+            }
+            
+            .youtube-song-title {
+                font-size: 1.1rem;
+            }
+            
+            .youtube-link-btn {
+                padding: 12px 25px;
+                font-size: 1.1rem;
+            }
+            
+            .consent-btn {
+                min-width: 200px;
+                padding: 15px 30px;
+                font-size: 1.1rem;
+                margin: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Modal de consentimiento de audio -->
+    <div class="audio-consent-modal hidden" id="audioConsentModal">
+        <div class="consent-content">
+            <div class="consent-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            <h2 class="consent-title">Bienvenida a Nuestra Historia</h2>
+            <p class="consent-text">Esta página contiene una canción especial que acompaña nuestro viaje de amor. ¿Te gustaría escuchar nuestra canción mientras exploras nuestros momentos especiales?</p>
+            <div>
+                <button class="consent-btn" id="allowAudio">
+                    <i class="fas fa-play-circle"></i> Sí, quiero escuchar la canción
+                </button>
+                <button class="consent-btn consent-btn-secondary" id="denyAudio">
+                    <i class="fas fa-volume-mute"></i> Continuar sin música
+                </button>
+            </div>
+            <p class="consent-footer">
+                Puedes acceder a la canción en cualquier momento desde la sección correspondiente
+            </p>
+        </div>
+    </div>
+
+    <!-- Navegación por puntos -->
+    <div class="navigation">
+        <div class="nav-dots">
+            <div class="nav-dot active" data-section="cover"></div>
+            <div class="nav-dot" data-section="poems"></div>
+            <div class="nav-dot" data-section="letter"></div>
+            <div class="nav-dot" data-section="quotes"></div>
+            <div class="nav-dot" data-section="countdown"></div>
+            <div class="nav-dot" data-section="gallery"></div>
+            <div class="nav-dot" data-section="final"></div>
+        </div>
+    </div>
+
+    <!-- Sección 1: Portada -->
+    <section id="cover" class="cover-section">
+        <div class="cover-content">
+            <h1 class="cover-title animate-glow">Feliz Año Nuevo, Mi Amor</h1>
+            <h2 class="cover-subtitle">Nuestra Historia de Amor</h2>
+            <p class="cover-text">Por otro año lleno de amor, risas y aventuras juntos. Eres mi mejor regalo para empezar este nuevo ciclo. Cada día a tu lado es una bendición que atesoro en lo más profundo de mi corazón.</p>
+            <div class="cover-buttons">
+                <a href="#letter" class="cover-btn btn-letter animate-heartbeat">
+                    <i class="fas fa-envelope"></i> Leer Carta
+                </a>
+                <a href="#gallery" class="cover-btn btn-moments animate-heartbeat">
+                    <i class="fas fa-images"></i> Ver Momentos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 2: Poemas -->
+    <section id="poems" class="poem-section">
+        <div class="section-header">
+            <h2 class="section-title animate-glow">Poemas del Alma</h2>
+            <p class="section-subtitle">Palabras que intentan describir lo que significa para mí</p>
+        </div>
+        
+        <div class="poem-cards">
+            <div class="poem-card">
+                <h3 class="poem-card-title">Eterno Resplandor</h3>
+                <div class="poem-card-content">
+                    <p>En cada campanada de este año,<br>
+                    tu risa resuena en mi corazón.<br>
+                    No necesito deseos prestados,<br>
+                    tú eres mi única y dulce ilusión.<br>
+                    Que el tiempo se detenga ahora,<br>
+                    mientras te abrazo sin fin.</p>
+                </div>
+                <div class="poem-card-number">01 / 03</div>
+            </div>
+            
+            <div class="poem-card">
+                <h3 class="poem-card-title">Latidos Compartidos</h3>
+                <div class="poem-card-content">
+                    <p>Mi corazón late al ritmo de tu nombre,<br>
+                    cada latido es un susurro de tu amor.<br>
+                    En tus ojos encuentro mi hogar,<br>
+                    en tu sonrisa, la razón de mi existir.<br>
+                    Contigo, cada día es un milagro,<br>
+                    cada noche, un sueño hecho realidad.</p>
+                </div>
+                <div class="poem-card-number">02 / 03</div>
+            </div>
+            
+            <div class="poem-card">
+                <h3 class="poem-card-title">Promesa Eterna</h3>
+                <div class="poem-card-content">
+                    <p>Prometo amarte en cada amanecer,<br>
+                    en cada atardecer y en cada noche estrellada.<br>
+                    Seré tu refugio en la tormenta,<br>
+                    tu calma en la inquietud, tu paz en el caos.<br>
+                    Porque contigo, el tiempo es un regalo,<br>
+                    y cada instante, una eternidad.</p>
+                </div>
+                <div class="poem-card-number">03 / 03</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 3: Carta -->
+    <section id="letter" class="letter-section">
+        <div class="letter-container">
+            <h2 class="letter-title animate-glow">Una Carta Para Ti</h2>
+            <div class="letter-content">
+                <p>Gracias por hacer de este año el más especial de mi vida. Desde el momento en que entraste en mi mundo, todo ha cobrado más color. Tu sonrisa ilumina mis días más oscuros y tu amor me da fuerzas que no sabía que tenía.</p>
+                
+                <p style="margin-top: 30px;">Recuerdo cada momento juntos, desde nuestras pequeñas salidas por café hasta esos viajes improvisados. Este año nuevo no es sólo un cambio de fecha en el calendario, es una nueva oportunidad para seguir construyendo nuestra historia.</p>
+                
+                <p style="margin-top: 30px;">Prometo estar a tu lado en cada paso del nuevo año que comienza, celebrar tus victorias y sostenerte en los desafíos. Eres mi hoy y todos mis mañanas. Mi amor por ti crece con cada amanecer y se fortalece con cada atardecer que compartimos.</p>
+                
+                <p style="margin-top: 30px;">Eres el sueño que nunca supe que tenía, la respuesta a preguntas que nunca formule. En tus brazos he encontrado mi hogar, en tu mirada he visto mi futuro. Te amo más de lo que las palabras pueden expresar.</p>
+            </div>
+            
+            <div class="letter-signature">
+                <div class="signature-line">CON TODO MI AMOR</div>
+                <div class="signature-name animate-pulse">Alfredo</div>
+            </div>
+            
+            <div class="letter-footer">
+                <p>Hecho con <i class="fas fa-heart" style="color: #d63384;"></i> para la persona más especial del mundo.</p>
+                <p style="margin-top: 10px; font-size: 1rem;">©2023 Nuestra Historia | Cada día a tu lado es una página nueva en nuestro libro de amor</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 4: Frases de amor -->
+    <section id="quotes" class="quotes-section">
+        <div class="section-header">
+            <h2 class="section-title animate-glow">Frases de Nuestro Amor</h2>
+            <p class="section-subtitle">Palabras que capturan la esencia de lo que sentimos</p>
+        </div>
+        
+        <div class="quotes-slider swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="quote-item">
+                        <div class="quote-icon animate-float">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <div class="quote-text">
+                            "El amor no se mide por la cantidad de tiempo que pasamos juntos, sino por la intensidad con la que vivimos cada momento a tu lado."
+                        </div>
+                        <div class="quote-author">- Nuestro Amor</div>
+                    </div>
+                </div>
+                
+                <div class="swiper-slide">
+                    <div class="quote-item">
+                        <div class="quote-icon animate-float">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="quote-text">
+                            "En un mundo de miles de millones, encontrarte a ti fue el milagro más grande que la vida pudo darme."
+                        </div>
+                        <div class="quote-author">- Para Ti</div>
+                    </div>
+                </div>
+                
+                <div class="swiper-slide">
+                    <div class="quote-item">
+                        <div class="quote-icon animate-float">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="quote-text">
+                            "Tu amor es la melodía que da sentido a mi existencia, la luz que guía mis pasos en la oscuridad."
+                        </div>
+                        <div class="quote-author">- Eres Mi Todo</div>
+                    </div>
+                </div>
+                
+                <div class="swiper-slide">
+                    <div class="quote-item">
+                        <div class="quote-icon animate-float">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <div class="quote-text">
+                            "Contigo, cada amanecer es una promesa de felicidad y cada atardecer es un recuerdo que atesorar."
+                        </div>
+                        <div class="quote-author">- Mi Razón</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <!-- Sección 5: Cuenta regresiva y música de YouTube -->
+    <section id="countdown" class="countdown-section">
+        <div class="countdown-content">
+            <h2 class="countdown-title animate-glow">Nuestro futuro comienza en</h2>
+            <p class="countdown-subtitle">Cada segundo cuenta cuando estoy contigo. Esta cuenta regresiva marca el inicio de un nuevo capítulo en nuestra historia.</p>
+            
+            <div class="countdown-container">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">00</div>
+                    <div class="countdown-label">Días</div>
+                </div>
+                
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-label">Horas</div>
+                </div>
+                
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-label">Minutos</div>
+                </div>
+                
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-label">Segundos</div>
+                </div>
+            </div>
+            
+            <!-- REPRODUCTOR DE YOUTUBE - SOLUCIÓN 1 (ENLACE DIRECTO) -->
+            <div class="youtube-player-container">
+                <div class="youtube-icon">
+                    <i class="fab fa-youtube"></i>
+                </div>
+                
+                <div class="youtube-title-section">
+                    <h3 class="youtube-main-title">Nuestra Canción Especial</h3>
+                    <p class="youtube-song-title">TE AMO Y MAS - Del libro de la vida</p>
+                </div>
+                
+                <div>
+                    <a href="https://youtu.be/p_1Osm5xE5Y" 
+                       target="_blank" 
+                       class="youtube-link-btn">
+                        <i class="fas fa-play-circle"></i> Ver canción en YouTube
+                    </a>
+                </div>
+                
+                <p class="youtube-instructions">
+                    <i class="fas fa-info-circle"></i> Haz clic en el botón para abrir nuestra canción especial en YouTube
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 6: Carrusel de imágenes -->
+    <section id="gallery" class="gallery-section">
+        <h2 class="gallery-title animate-glow">Nuestros Mejores Momentos</h2>
+        
+        <div class="gallery-slider swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="9.jpeg" alt="Nuestro primer aniversario" class="gallery-img">
+                </div>
+                <div class="swiper-slide">
+                    <img src="8.jpeg" alt="Viaje a la playa" class="gallery-img">
+                </div>
+                <div class="swiper-slide">
+                    <img src="7.jpeg" alt="Cena romántica" class="gallery-img">
+                </div>
+                <div class="swiper-slide">
+                    <img src="6.jpeg" alt="Paseo en el parque" class="gallery-img">
+                </div>
+                <div class="swiper-slide">
+                    <img src="5.jpeg" alt="Celebración especial" class="gallery-img">
+                </div>
+                <div class="swiper-slide">
+                    <img src="4.jpeg" alt="Atardecer juntos" class="gallery-img">
+                </div>
+                <div class="swiper-slide">
+                    <img src="3.jpeg" alt="Atardecer juntos" class="gallery-img">
+                </div>
+                <div class="swiper-slide">
+                    <img src="2.jpeg" alt="Atardecer juntos" class="gallery-img">
+                </div>
+                <div class="swiper-slide">
+                    <img src="" alt="Atardecer juntos" class="gallery-img">
+            </div>
+            
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <!-- Sección 7: Frases finales -->
+    <section id="final" class="final-section">
+        <div class="final-container">
+            <h2 class="final-title animate-glow">Para Reflexionar Juntos</h2>
+            
+            <div class="final-quotes">
+                <div class="final-quote">
+                    <div class="final-quote-text">
+                        "El verdadero amor no es encontrar a alguien perfecto, sino ver a una persona imperfecta de manera perfecta."
+                    </div>
+                    <div class="final-quote-author">- Nuestro compromiso</div>
+                </div>
+                
+                <div class="final-quote">
+                    <div class="final-quote-text">
+                        "En tus brazos encontré el hogar que mi alma buscaba, en tu mirada descubrí el amor que mi corazón anhelaba."
+                    </div>
+                    <div class="final-quote-author">- Mi refugio</div>
+                </div>
+                
+                <div class="final-quote">
+                    <div class="final-quote-text">
+                        "Cada risa compartida, cada lágrima enjugada, cada sueño conversado, es un hilo más en el tapiz de nuestra historia."
+                    </div>
+                    <div class="final-quote-author">- Nuestra trama</div>
+                </div>
+            </div>
+            
+            <div class="heart-container animate-heartbeat">
+                <i class="fas fa-heart"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">Nuestra Historia de Amor</div>
+        <p class="footer-text">Esta página es un tributo a nuestro amor, creada con todo mi cariño para recordar los momentos más especiales que hemos compartido y los que están por venir. Cada día a tu lado es un regalo que atesoro en lo más profundo de mi corazón.</p>
+        <div class="copyright">
+            <p>© 2023 - Nuestros Mejores Momentos | Creado con <i class="fas fa-heart" style="color: #d63384;"></i> para la persona más especial del mundo</p>
+            <p style="margin-top: 10px;">Cada segundo a tu lado es un momento para atesorar</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script>
+        // Inicializar Swiper para el carrusel de frases
+        const quotesSwiper = new Swiper('.quotes-slider', {
+            direction: 'horizontal',
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            },
+        });
+
+        // Inicializar Swiper para la galería
+        const gallerySwiper = new Swiper('.gallery-slider', {
+            direction: 'horizontal',
+            loop: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                320: {
+                    slidesPerView: 1,
+                    spaceBetween: 20
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 30
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 30
+                }
+            }
+        });
+
+        // Cuenta regresiva exacta como en la imagen
+        function updateCountdown() {
+            // Fecha objetivo: 1 de enero del próximo año a las 00:00
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            const nextYear = currentYear + 1;
+            const targetDate = new Date(nextYear, 0, 1, 0, 0, 0);
+            
+            const timeDifference = targetDate - now;
+            
+            // Calcular días, horas, minutos y segundos
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+            
+            // Actualizar los elementos HTML con ceros a la izquierda
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        // Actualizar la cuenta regresiva cada segundo
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Llamar inmediatamente al cargar
+        
+        // Código para el modal de consentimiento
+        const audioConsentModal = document.getElementById('audioConsentModal');
+        const allowAudioBtn = document.getElementById('allowAudio');
+        const denyAudioBtn = document.getElementById('denyAudio');
+        
+        // Mostrar modal al cargar la página
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                audioConsentModal.classList.remove('hidden');
+            }, 1500);
+        });
+        
+        // Evento para permitir audio desde el modal
+        allowAudioBtn.addEventListener('click', function() {
+            audioConsentModal.classList.add('hidden');
+            // Mostrar notificación
+            showMusicNotification("¡Perfecto! Ahora puedes ver nuestra canción especial");
+            
+            // Hacer scroll suave al reproductor
+            setTimeout(() => {
+                document.querySelector('.youtube-player-container').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+            }, 800);
+        });
+        
+        // Evento para denegar audio desde el modal
+        denyAudioBtn.addEventListener('click', function() {
+            audioConsentModal.classList.add('hidden');
+            showMusicNotification("Puedes ver la canción más tarde si lo deseas", false);
+        });
+        
+        // Mostrar notificación de música
+        function showMusicNotification(message, isPlaying = true) {
+            // Remover notificaciones anteriores
+            const oldNotification = document.querySelector('.music-notification');
+            if (oldNotification) oldNotification.remove();
+            
+            const notification = document.createElement('div');
+            notification.className = 'music-notification';
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: rgba(30, 30, 30, 0.95);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                z-index: 10000;
+                border-left: 5px solid ${isPlaying ? '#ff0000' : '#6c757d'};
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+                animation: fadeIn 0.5s ease;
+                max-width: 350px;
+                backdrop-filter: blur(10px);
+            `;
+            notification.innerHTML = `
+                <i class="fas fa-${isPlaying ? 'music' : 'info-circle'}" style="color: ${isPlaying ? '#ff0000' : '#6c757d'};"></i>
+                <div>
+                    <div style="font-weight: 600;">${message}</div>
+                    <div style="font-size: 0.9rem; color: #adb5bd;">Encuentra la canción en la sección de cuenta regresiva</div>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            
+            // Remover después de 3 segundos
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100px)';
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
+        }
+        
+        // Navegación por puntos
+        const navDots = document.querySelectorAll('.nav-dot');
+        const sections = document.querySelectorAll('section');
+        
+        // Función para actualizar el punto activo
+        function updateActiveNav() {
+            let currentSection = '';
+            const scrollPosition = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    currentSection = section.id;
+                }
+            });
+            
+            navDots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.dataset.section === currentSection) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+        
+        // Navegación al hacer clic en los puntos
+        navDots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                const targetSection = this.dataset.section;
+                const targetElement = document.getElementById(targetSection);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Animaciones al hacer scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.cover-title, .cover-subtitle, .cover-text, .cover-buttons, .poem-card, .letter-container, .quote-item, .countdown-title, .countdown-subtitle, .countdown-container, .youtube-player-container, .gallery-title, .gallery-slider, .final-title, .final-quote');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0) scale(1)';
+                }
+            });
+            
+            // Actualizar navegación
+            updateActiveNav();
+        }
+        
+        // Configurar elementos para animación
+        document.querySelectorAll('.cover-title, .cover-subtitle, .cover-text, .cover-buttons, .poem-card, .letter-container, .quote-item, .countdown-title, .countdown-subtitle, .countdown-container, .youtube-player-container, .gallery-title, .gallery-slider, .final-title, .final-quote, .heart-container').forEach(element => {
+            element.style.opacity = '0';
+            if (element.classList.contains('heart-container')) {
+                element.style.transform = 'scale(0.5)';
+            } else {
+                element.style.transform = 'translateY(30px)';
+            }
+            element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        });
+        
+        // Llamar a la función al cargar y al hacer scroll
+        window.addEventListener('load', () => {
+            // Animar elementos de la portada con retraso
+            setTimeout(() => {
+                document.querySelector('.cover-title').style.opacity = '1';
+                document.querySelector('.cover-title').style.transform = 'translateY(0)';
+            }, 300);
+            
+            setTimeout(() => {
+                document.querySelector('.cover-subtitle').style.opacity = '1';
+                document.querySelector('.cover-subtitle').style.transform = 'translateY(0)';
+            }, 600);
+            
+            setTimeout(() => {
+                document.querySelector('.cover-text').style.opacity = '1';
+                document.querySelector('.cover-text').style.transform = 'translateY(0)';
+            }, 900);
+            
+            setTimeout(() => {
+                document.querySelector('.cover-buttons').style.opacity = '1';
+                document.querySelector('.cover-buttons').style.transform = 'translateY(0)';
+            }, 1200);
+            
+            animateOnScroll();
+        });
+        
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // Navegación suave para los botones
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
